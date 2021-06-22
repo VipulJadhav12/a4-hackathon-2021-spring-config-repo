@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: employee-mgmt-system-apis
+        uri: http://localhost:8080
+        predicates:
+        - Path=/api/v1/employees-list
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
